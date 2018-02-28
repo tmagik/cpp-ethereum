@@ -27,6 +27,7 @@ enum class VMKind
 {
     Interpreter,
     JIT,
+    Smart,
     Hera,
 };
 

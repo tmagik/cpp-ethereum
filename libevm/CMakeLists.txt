@@ -15,6 +15,7 @@ set(sources
 if(EVMJIT OR HERA)
     list(APPEND sources
         EVMC.cpp EVMC.h
+        SmartVM.cpp SmartVM.h
     )
 endif()
 

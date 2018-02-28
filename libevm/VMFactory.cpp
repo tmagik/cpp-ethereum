@@ -17,6 +17,7 @@
 
 #include "VMFactory.h"
 #include "EVMC.h"
+#include "SmartVM.h"
 #include "VM.h"
 #include <evmjit.h>
 #include <hera.h>
@@ -49,6 +50,7 @@ VMKindTableEntry vmKindsTable[] = {
     {VMKind::Interpreter, "interpreter"},
 #if ETH_EVMJIT
     {VMKind::JIT, "jit"},
+    {VMKind::Smart, "smart"},
 #endif
 #if ETH_HERA
     {VMKind::Hera, "hera"},
@@ -162,6 +164,8 @@ std::unique_ptr<VMFace> VMFactory::create(VMKind _kind)
 #ifdef ETH_EVMJIT
     case VMKind::JIT:
         return std::unique_ptr<VMFace>(new EVMC{evmjit_create()});
+    case VMKind::Smart:
+        return std::unique_ptr<VMFace>(new SmartVM);
 #endif
 #ifdef ETH_HERA
     case VMKind::Hera:
